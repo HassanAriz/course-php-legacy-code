@@ -2,32 +2,26 @@
 
 declare(strict_types=1);
 
+namespace Core;
+
 class View
 {
-
-    private $v;
+    private $view;
     private $t;
     private $data = [];
 
-
-
-
-
-    public function __construct($v, $t = "back")
+    public function __construct($view, $t = "back")
     {
-        $this->setView($v);
-        $this->setTemplate($t);
+        $this->setView($view);
+        $this->setTemplate($template);
     }
 
     public function setView(
-
-
-
-        $v)
-    {
-        $viewPath = "views/" . $v . ".view.php";
+        $view
+    ) {
+        $viewPath = "views/" . $view . ".view.php";
         if (file_exists($viewPath)) {
-            $this->v = $viewPath;
+            $this->view = $viewPath;
         } else {
             die("Attention le fichier view n'existe pas " . $viewPath);
         }
@@ -35,11 +29,11 @@ class View
 
     }
 
-    public function setTemplate($t)
+    public function setTemplate($template)
     {
-        $templatePath = "views/templates/" . $t . ".tpl.php";
+        $templatePath = "views/templates/" . $template . ".tpl.php";
         if (file_exists($templatePath)) {
-            $this->t = $templatePath;
+            $this->template = $templatePath;
         } else {
             die("Attention le fichier template n'existe pas " . $templatePath);
         }
@@ -65,7 +59,7 @@ class View
     public function __destruct()
     {
         extract($this->data);
-        include $this->t;
+        include $this->template;
     }
 }
 

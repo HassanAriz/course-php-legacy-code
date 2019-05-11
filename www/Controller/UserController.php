@@ -1,8 +1,16 @@
 <?php
 
-use Core\Routing;
+declare(strict_types=1);
 
-class UsersController
+
+namespace Controller;
+
+//use Core\Routing;
+use Model\User;
+use Core\View;
+use Core\Validator;
+
+class UserController
 {
 
     public function defaultAction()
@@ -12,20 +20,22 @@ class UsersController
 
     public function addAction()
     {
-        $user = new Users();
-        $form = $user->getRegisterForm();
+        $user = new User();
+        $form = $user->getRegisterForm(); // mettre getRegisterForm dans une classe a part
 
 
-        $v = new View("addUser", "front");
-        $v->assign("form", $form);
-
-
+        $view = new View("addUser", "front");
+        $view->assign("form", $form);
     }
 
     public function saveAction()
     {
 
-        $user = new Users();
+
+
+
+
+        $user = new User();
         $form = $user->getRegisterForm();
         $method = strtoupper($form["config"]["method"]);
         $data = $GLOBALS["_" . $method];
@@ -47,16 +57,13 @@ class UsersController
 
         }
 
-        $v = new View("addUser", "front");
-        $v->assign("form", $form);
-
-
+        $view = new View("addUser", "front");
+        $view->assign("form", $form);
     }
 
 
     public function loginAction()
     {
-
         $user = new Users();
         $form = $user->getLoginForm();
 
@@ -75,16 +82,13 @@ class UsersController
 
         }
 
-        $v = new View("loginUser", "front");
-        $v->assign("form", $form);
-
+        $view = new View("loginUser", "front");
+        $view->assign("form", $form);
     }
 
 
     public function forgetPasswordAction()
     {
-
-        $v = new View("forgetPasswordUser", "front");
-
+        $view = new View("forgetPasswordUser", "front");
     }
 }

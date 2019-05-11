@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-class Users extends BaseSQL
-{
+namespace Model;
 
+use Core\BaseSQL;
+
+class UserModel extends BaseSQL
+{
     public $id = null;
     public $firstname;
     public $lastname;
@@ -13,9 +16,14 @@ class Users extends BaseSQL
     public $role = 1;
     public $status = 0;
 
-    public function __construct()
+    public function __construct(
+        string $driver,
+        string $host,
+        string $name,
+        string $user,
+        string $password)
     {
-        parent::__construct();
+        parent::__construct($driver, $host, $name, $user, $password);
     }
 
 
